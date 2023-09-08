@@ -73,10 +73,23 @@ map.on('style.load', () => {
         rotation: { x: 90, y: 217.5, z: 0 }
       };
 
-      tb.loadObj(options, (model) => {
+     tb.loadObj(options, (model) => {
         model.setCoords([-122.43075947189408, 37.807074033128124]);
         model.setRotation({ x: 0, y: 0, z: 241 });
         tb.add(model);
+        
+        // Add mouse event listener using Three.js raycasting
+        tb.addRayCasterEvent(model.mesh, "click", (e) => {
+          // Create a new Mapbox popup
+          const popup = new mapboxgl.Popup({ closeOnClick: true })
+            .setLngLat([e.lngLat.lng, e.lngLat.lat])
+            .setHTML(
+              <div>
+              <div> Pop Open </div>
+            <a href="https://google.com">Google</a>
+            </div>)
+            .addTo(map);
+        });
       });
     },
 
