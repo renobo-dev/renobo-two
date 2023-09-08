@@ -17,13 +17,13 @@ const map = new mapboxgl.Map({
 // Add the control to the map.
 map.addControl(
   new MapboxGeocoder({
-  accessToken: mapboxgl.accessToken,
-  mapboxgl: mapboxgl,
-  marker: {
-    color: 'white' // Set the marker color to your desired color
-}
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    marker: {
+      color: '#5D5D5D' // Set the marker color to your desired color
+    }
   })
-  );
+);
 // Define the flyToBuilding function
 function flyToBuilding(coordinates) {
   map.flyTo({
@@ -45,6 +45,14 @@ flyButton.addEventListener('click', function () {
   // Coordinates of the building (longitude, latitude)
   var buildingCoordinates = [-122.43075947189408, 37.807074033128124]; // Replace with the coordinates of your building
   flyToBuilding(buildingCoordinates);
+  const popup = new mapboxgl.Popup({ closeOnClick: false })
+  .setLngLat([-122.40804038602273, 37.76428419614416])
+  .setHTML('<a href="https://thelocalflea.com/pages/bayarea" style="color: black; text-decoration: none; font-weight: bold;">Furniture Shop</a>')
+  .addTo(map);
+  const popup1 = new mapboxgl.Popup({ closeOnClick: false })
+  .setLngLat([-122.43075947189408, 37.807074033128124])
+  .setHTML('<a href="#" style="color: black; text-decoration: none; font-weight: bold;">Enter the school</a>')
+  .addTo(map);
 });
 
 // eslint-disable-next-line no-undef
@@ -85,3 +93,4 @@ map.on('style.load', () => {
     }
   });
 });
+
